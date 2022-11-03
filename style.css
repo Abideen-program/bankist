@@ -660,4 +660,14 @@ h4 {
   color: #bbb;
   font-size: 1.5rem;
   font-weight: 400;
+
+  background: #37383d;
+  width: 120%;
+}
+
+.warn {
+  color: rgb(248, 135, 135);
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: bold;
 }
