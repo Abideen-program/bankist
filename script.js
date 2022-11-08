@@ -6,8 +6,8 @@ const openModalBtn = document.querySelectorAll('.btn--show-modal');
 const closeModalBtn = document.querySelector('.btn--close-modal');
 const section1 = document.querySelector('#section--1');
 const learnMoreBtn = document.querySelector('.btn--scroll-to');
-const navLink = document.querySelectorAll('.nav__link')
-const navLinks = document.querySelector('.nav__links')
+const navLink = document.querySelectorAll('.nav__link');
+const navLinks = document.querySelector('.nav__links');
 
 //handling opening of modal window
 const openModal = e => {
@@ -71,10 +71,39 @@ navLink.forEach((link) => {
 */
 
 //implementing smooth scrolling using the parent of nav-link via event delegation
-navLinks.addEventListener('click', function(e) {
-  e.preventDefault()
-  if(e.target.classList.contains('nav__link')) {
-    const id = e.target.getAttribute('href')
-    document.querySelector(id).scrollIntoView({behavior: 'smooth'})
+navLinks.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
-})
+});
+
+//implementing tab funtionality
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabContents = document.querySelectorAll('.operations__content');
+
+//using event delegation
+tabsContainer.addEventListener('click', function (e) {
+  //activating the tab buttons
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+  //check if the tab button is being click
+  if (!clicked) return;
+  //remove active class from all the tab buttons
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+  //add active class to the tab button clicked
+  clicked.classList.add('operations__tab--active');
+
+  //ACTIVATING THE TAB CONTENT
+
+  //remove the active class from the all the content
+  tabContents.forEach(content =>
+    content.classList.remove('operations__content--active')
+  );
+  //adding the active class to the content of the clicked tab
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
