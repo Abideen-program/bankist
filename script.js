@@ -84,25 +84,21 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabContents = document.querySelectorAll('.operations__content');
 
-//using event delegation
+// using event delegation
 tabsContainer.addEventListener('click', function (e) {
-  //activating the tab buttons
+  //this is to make sure that the tab button is always clicked
   const clicked = e.target.closest('.operations__tab');
-  console.log(clicked);
-  //check if the tab button is being click
+  //don't do anything if the tab button wasn't clicked
   if (!clicked) return;
-  //remove active class from all the tab buttons
+  //else, remove active class from the tab buttons
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
-  //add active class to the tab button clicked
+  //then add the active class to the clicked tab button
   clicked.classList.add('operations__tab--active');
 
-  //ACTIVATING THE TAB CONTENT
-
-  //remove the active class from the all the content
-  tabContents.forEach(content =>
-    content.classList.remove('operations__content--active')
-  );
-  //adding the active class to the content of the clicked tab
+  //displaying the tab contents according to the clicked tab button
+  //first, remove the active class from all the tab contents
+  tabContents.forEach((content) => content.classList.remove('operations__content--active'))
+  //then, add the active class to the content of the clicked button
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
