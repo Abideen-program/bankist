@@ -103,3 +103,31 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+//implementing the fade out navbar using event delegation
+const nav = document.querySelector('.nav')
+// const navLink = document.querySelectorAll('.nav__link')
+nav.addEventListener('mouseover', function(e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target
+    const siblings =link.closest('.nav').querySelectorAll('.nav__link')
+    siblings.forEach((el) => {
+      if (el !== link) {
+        el.style.opacity = 0.5
+      }
+    })
+  }
+})
+
+nav.addEventListener('mouseout', function(e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link')
+    console.log(siblings)
+    siblings.forEach((el) => {
+      if (el !== link) {
+        el.style.opacity = 1
+      }
+    })
+  }
+})
