@@ -126,6 +126,33 @@ const handleFadeOut = function (e) {
 
 //fade out function
 nav.addEventListener('mouseover', handleFadeOut.bind(0.5));
-
 //to reset the fade out functionality
 nav.addEventListener('mouseout', handleFadeOut.bind(1));
+
+//implementing sticky nav bar function
+//This is a bad practice, as it wiil cause performance issue on old gadgets
+/* 
+const intial = section1.getBoundingClientRect()
+window.addEventListener('scroll', function() {
+  if (window.scrollY > intial.top) nav.classList.add('sticky')
+  else nav.classList.remove('sticky')
+})
+*/
+
+//implementing sticky nav bar using intersection API
+const navHeight = nav.getBoundingClientRect().height; //get the height of the nav bar
+const stickyNav = entries => {
+  const [entry] = entries; //destructure the entries
+  //check if the header is still intersecting with the viewport (Yes, add sticky class to nav)
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky'); //(No, remove sticky class from class)
+};
+
+const option = {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, option);
+headerObserver.observe(header);
