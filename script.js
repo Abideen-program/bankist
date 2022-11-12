@@ -97,7 +97,9 @@ tabsContainer.addEventListener('click', function (e) {
 
   //displaying the tab contents according to the clicked tab button
   //first, remove the active class from all the tab contents
-  tabContents.forEach((content) => content.classList.remove('operations__content--active'))
+  tabContents.forEach(content =>
+    content.classList.remove('operations__content--active')
+  );
   //then, add the active class to the content of the clicked button
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
@@ -105,29 +107,25 @@ tabsContainer.addEventListener('click', function (e) {
 });
 
 //implementing the fade out navbar using event delegation
-const nav = document.querySelector('.nav')
-// const navLink = document.querySelectorAll('.nav__link')
-nav.addEventListener('mouseover', function(e) {
-  if (e.target.classList.contains('nav__link')) {
-    const link = e.target
-    const siblings =link.closest('.nav').querySelectorAll('.nav__link')
-    siblings.forEach((el) => {
-      if (el !== link) {
-        el.style.opacity = 0.5
-      }
-    })
-  }
-})
+const nav = document.querySelector('.nav');
 
-nav.addEventListener('mouseout', function(e) {
+//this handles the fade out functionality
+const handleFadeOut = function (e) {
   if (e.target.classList.contains('nav__link')) {
-    const link = e.target
-    const siblings = link.closest('.nav').querySelectorAll('.nav__link')
-    console.log(siblings)
-    siblings.forEach((el) => {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+    siblings.forEach(el => {
       if (el !== link) {
-        el.style.opacity = 1
+        el.style.opacity = this;
       }
-    })
+    });
+    logo.style.opacity = this;
   }
-})
+};
+
+//fade out function
+nav.addEventListener('mouseover', handleFadeOut.bind(0.5));
+
+//to reset the fade out functionality
+nav.addEventListener('mouseout', handleFadeOut.bind(1));
