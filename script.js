@@ -177,7 +177,7 @@ const sectionObserver = new IntersectionObserver(revealSection, sectionOption);
 
 allSections.forEach(section => {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden'); //add the hidden class to the sections
+  // section.classList.add('section--hidden'); //add the hidden class to the sections
 });
 
 //implementing lazy loading of images
@@ -203,3 +203,74 @@ const imageObserver = new IntersectionObserver(lazyLoad, loadOption);
 lazyImages.forEach(image => {
   imageObserver.observe(image);
 });
+
+//sliders
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+const btnRight = document.querySelector('.slider__btn--right');
+const btnLeft = document.querySelector('.slider__btn--left');
+let currSlide = 0;
+const maxSlide = slides.length - 1;
+
+//general function to translate side
+const goToSlide = currentSlide => {
+  slides.forEach((slide, index) => {
+    slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+  });
+};
+
+goToSlide(0);
+
+//creating the slider dots
+const dotContainer = document.querySelector('.dots')
+const createDots = () => {
+  slides.forEach((_, i) => {
+    const html = `<button class="dots__dot" data-slide="${i}"></button>`
+    dotContainer.insertAdjacentHTML('beforeend', html)
+  })
+}
+createDots()
+
+//making dot active
+
+
+const nextSlide = () => {
+  if (currSlide === maxSlide) {
+    currSlide = 0;
+  } else {
+    currSlide++;
+  }
+  goToSlide(currSlide);
+};
+
+const prevSlide = () => {
+  if (currSlide === 0) {
+    currSlide = maxSlide;
+  } else {
+    currSlide--;
+  }
+  goToSlide(currSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
+
+//handling slide movement with arrow keys
+const arrowKeysCallBack = (entries, observer) => {
+  const [entry] = entries;
+  if (entry.isIntersecting)
+    document.addEventListener('keydown', function (e) {
+      e.key === `ArrowRight` && nextSlide();
+      e.key === `ArrowLeft` && prevSlide();
+    });
+  else return;
+  observer.unobserve(entry.target)
+};
+
+const arrowKeysObserver = new IntersectionObserver(arrowKeysCallBack, {
+  root: null,
+  threshold: 1,
+});
+arrowKeysObserver.observe(slider);
+
+//changing slides with dots
