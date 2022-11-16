@@ -204,73 +204,100 @@ lazyImages.forEach(image => {
   imageObserver.observe(image);
 });
 
-//sliders
-const slider = document.querySelector('.slider');
-const slides = document.querySelectorAll('.slide');
-const btnRight = document.querySelector('.slider__btn--right');
-const btnLeft = document.querySelector('.slider__btn--left');
-let currSlide = 0;
-const maxSlide = slides.length - 1;
+//slider function
+const sliderFuction = function () {
+  const slider = document.querySelector('.slider');
+  const slides = document.querySelectorAll('.slide');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  let currSlide = 0;
+  const maxSlide = slides.length - 1;
 
-//general function to translate side
-const goToSlide = currentSlide => {
-  slides.forEach((slide, index) => {
-    slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+  //general function to translate side
+  const goToSlide = currentSlide => {
+    slides.forEach((slide, index) => {
+      slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+    });
+  };
+
+  //creating the slider dots based on number of slides
+  const dotContainer = document.querySelector('.dots');
+  const createDots = () => {
+    slides.forEach((_, i) => {
+      const html = `<button class="dots__dot" data-slide="${i}"></button>`;
+      dotContainer.insertAdjacentHTML('beforeend', html);
+    });
+  };
+
+  //making dot active
+  //we need to active class from the dots first
+  const activateDot = slide => {
+    document.querySelectorAll('.dots__dot').forEach(dot => {
+      dot.classList.remove('dots__dot--active');
+    });
+
+    //add it bact to tohe dot of active slide
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  const init = () => {
+    goToSlide(0); //
+    createDots();
+    activateDot(0);
+  };
+
+  init();
+
+  const nextSlide = () => {
+    if (currSlide === maxSlide) {
+      currSlide = 0;
+    } else {
+      currSlide++;
+    }
+    goToSlide(currSlide);
+    activateDot(currSlide);
+  };
+
+  const prevSlide = () => {
+    if (currSlide === 0) {
+      currSlide = maxSlide;
+    } else {
+      currSlide--;
+    }
+    goToSlide(currSlide);
+    activateDot(currSlide);
+  };
+
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  //handling slide movement with arrow keys
+  const arrowKeysCallBack = (entries, observer) => {
+    const [entry] = entries;
+    if (entry.isIntersecting)
+      document.addEventListener('keydown', function (e) {
+        e.key === `ArrowRight` && nextSlide();
+        e.key === `ArrowLeft` && prevSlide();
+      });
+    else return;
+    observer.unobserve(entry.target);
+  };
+
+  const arrowKeysObserver = new IntersectionObserver(arrowKeysCallBack, {
+    root: null,
+    threshold: 1,
+  });
+  arrowKeysObserver.observe(slider);
+
+  //changing slides with dots using event delegation
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset; //get the slide number from the data-set
+      goToSlide(slide);
+      activateDot(slide);
+    }
   });
 };
-
-goToSlide(0);
-
-//creating the slider dots
-const dotContainer = document.querySelector('.dots')
-const createDots = () => {
-  slides.forEach((_, i) => {
-    const html = `<button class="dots__dot" data-slide="${i}"></button>`
-    dotContainer.insertAdjacentHTML('beforeend', html)
-  })
-}
-createDots()
-
-//making dot active
-
-
-const nextSlide = () => {
-  if (currSlide === maxSlide) {
-    currSlide = 0;
-  } else {
-    currSlide++;
-  }
-  goToSlide(currSlide);
-};
-
-const prevSlide = () => {
-  if (currSlide === 0) {
-    currSlide = maxSlide;
-  } else {
-    currSlide--;
-  }
-  goToSlide(currSlide);
-};
-
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', prevSlide);
-
-//handling slide movement with arrow keys
-const arrowKeysCallBack = (entries, observer) => {
-  const [entry] = entries;
-  if (entry.isIntersecting)
-    document.addEventListener('keydown', function (e) {
-      e.key === `ArrowRight` && nextSlide();
-      e.key === `ArrowLeft` && prevSlide();
-    });
-  else return;
-  observer.unobserve(entry.target)
-};
-
-const arrowKeysObserver = new IntersectionObserver(arrowKeysCallBack, {
-  root: null,
-  threshold: 1,
-});
-arrowKeysObserver.observe(slider);
-
-//changing slides with dots
+sliderFuction();
