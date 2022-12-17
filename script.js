@@ -87,6 +87,8 @@ const tabContents = document.querySelectorAll('.operations__content');
 // using event delegation
 tabsContainer.addEventListener('click', function (e) {
   //this is to make sure that the tab button is always clicked
+
+  // get the closest ancestor of the clicked with the class of ".operations__tab"
   const clicked = e.target.closest('.operations__tab');
   //don't do anything if the tab button wasn't clicked
   if (!clicked) return;

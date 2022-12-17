@@ -29,6 +29,7 @@ body {
   color: #444;
   line-height: 1.9;
   background-color: #f3f3f3;
+  overflow-x: hidden;
 }
 
 .section {
@@ -369,7 +370,6 @@ h4 {
   fill: var(--color-tertiary);
 }
 
-
 /* SLIDER */
 .slider {
   max-width: 100rem;
@@ -647,7 +647,6 @@ h4 {
   opacity: 0;
 }
 
-
 /* COOKIE MESSAGE */
 .cookie-message {
   display: flex;
@@ -668,4 +667,44 @@ h4 {
   text-decoration: underline;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 2.5rem;
+  }
+
+  .nav__logo {
+    height: 4rem;
+  }
+
+  .nav__item {
+    margin-left: 2.5rem;
+  }
+
+  .nav__link--btn:link,
+  .nav__link--btn:visited {
+    padding: 0.8rem 2rem;
+    font-size: 1.3rem;
+  }
+
+  h1{
+    font-size: 4rem;
+  }
+
+  .section__header{
+    font-size: 3rem;
+  }
+
+  .features {
+    margin: 0;
+  }
+
+  .btn {
+    padding: 1.2rem 3rem;
+  }
+
+  .footer__link {
+    font-size: 1.3rem;
+  }
 }
