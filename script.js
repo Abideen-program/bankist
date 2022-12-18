@@ -303,3 +303,14 @@ const sliderFuction = function () {
   });
 };
 sliderFuction();
+
+
+//Hambugger toggle
+
+// const navToggle = document.querySelector('.nav-toggle');
+// // const navLink = document.querySelectorAll('.nav__link');
+// const eachNavLinks = Array.from(navLink);
+
+// navToggle.addEventListener('click', function() {
+//   document.body.toggleAttribute.classList('nav-open')
+// })
