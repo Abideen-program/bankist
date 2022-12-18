@@ -675,6 +675,10 @@ h4 {
   .header {
     height: 70vh;
   }
+
+  .modal__header {
+    text-align: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -856,5 +860,43 @@ h4 {
     margin: 0 0 3rem;
     position: relative;
     left: 40%;
+  }
+
+  .modal {
+    max-width: 30rem;
+    padding: 5rem 2rem;
+  }
+
+  .modal__header {
+    font-size: 2rem;
+  }
+
+  .modal__form {
+    margin: 0 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .modal__form label {
+    font-size: 1.2rem;
+  }
+
+  .modal__form input {
+    font-size: 1.3rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .header {
+    height: 90vh;
+  }
+
+  .testimonial__name {
+    font-size: 1.2rem;
+  }
+
+  .testimonial__location {
+    font-size: 1rem;
   }
 }
