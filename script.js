@@ -304,13 +304,19 @@ const sliderFuction = function () {
 };
 sliderFuction();
 
-
 //Hambugger toggle
 
-// const navToggle = document.querySelector('.nav-toggle');
-// // const navLink = document.querySelectorAll('.nav__link');
-// const eachNavLinks = Array.from(navLink);
+const navToggle = document.querySelector('.nav-toggle');
+const eachNavLinks = Array.from(navLink);
 
-// navToggle.addEventListener('click', function() {
-//   document.body.toggleAttribute.classList('nav-open')
-// })
+//clicking will add the class to the body to facilitates transformation of the nav__links
+navToggle.addEventListener('click', function () {
+  document.body.classList.toggle('nav-open');
+});
+
+//clicking will remove the class from the body to facilitates transformation of the nav__links
+eachNavLinks.forEach(link => {
+  link.addEventListener('click', function () {
+    document.body.classList.remove('nav-open');
+  });
+});
