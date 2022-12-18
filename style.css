@@ -889,7 +889,7 @@ h4 {
 
 @media (max-width: 375px) {
   .header {
-    height: 90vh;
+    height: 100vh;
   }
 
   .testimonial__name {
