@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Bankist | When Banking meets Minimalist</title>
+    <title>Bankist | When Banking is easy</title>
   </head>
   <body>
     <header class="header">
@@ -329,12 +329,15 @@
       </h2>
       <form class="modal__form">
         <label>First Name</label>
-        <input type="text" />
+        <input type="text" class="firstInput"/>
+        <p class="error firstName"></p>
         <label>Last Name</label>
-        <input type="text" />
+        <input type="text" class="lastInput"/>
+        <p class="error lastName"></p>
         <label>Email Address</label>
-        <input type="email" />
-        <button class="btn">Next step &rarr;</button>
+        <input type="email" class="emailInput"/>
+        <p class="error email"></p>
+        <button class="btn modalNextBtn">Next step &rarr;</button>
       </form>
     </div>
     <div class="overlay hidden"></div>

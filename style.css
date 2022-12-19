@@ -582,7 +582,7 @@ h4 {
   transform: translate(-50%, -50%);
   max-width: 60rem;
   background-color: #f3f3f3;
-  padding: 5rem 6rem;
+  padding: 5rem 2rem;
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
   z-index: 1000;
   transition: all 0.5s;
@@ -608,22 +608,26 @@ h4 {
 
 .modal__form {
   margin: 0 3rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  align-items: center;
-  gap: 2.5rem;
+  display: block;
+  /* grid-template-columns: 1fr 2fr; */
+  /* align-items: center; */
+  /* gap: 2.5rem; */
 }
 
 .modal__form label {
+  display: block;
   font-size: 1.7rem;
   font-weight: 500;
+  width: 100%;
 }
 
 .modal__form input {
+  display: block;
   font-size: 1.7rem;
   padding: 1rem 1.5rem;
   border: 1px solid #ddd;
   border-radius: 0.5rem;
+  width: 100%;
 }
 
 .modal__form button {
@@ -642,6 +646,11 @@ h4 {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+.error {
+  font-size: 1.4rem;
+  color: red;
 }
 
 .hidden {
@@ -950,7 +959,7 @@ h4 {
   }
 
   .modal {
-    max-width: 30rem;
+    width: 30rem;
     padding: 5rem 2rem;
   }
 
@@ -960,17 +969,17 @@ h4 {
 
   .modal__form {
     margin: 0 1rem;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    /* grid-template-columns: 1fr 1fr;
+    gap: 1rem; */
   }
 
   .modal__form label {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   .modal__form input {
-    font-size: 1.3rem;
-    padding: 0.4rem 1rem;
+    font-size: 1.5rem;
+    padding: 1rem;
   }
 }
 

@@ -41,7 +41,7 @@ message.classList.add('cookie-message');
 message.innerHTML = `<p>We use cookies for improved functionalities and analytics.</p> <button class='btn btn--close--cookie'>Got it!</button>`;
 const html = `<p class='warn'>Warning:</p>`;
 
-//ADDING TO THE CREATED ELEMENT AS THE FIRST CHILD OF THE HEADER
+//********************************** ADDING TO THE CREATED ELEMENT AS THE FIRST CHILD OF THE HEADER ***********
 const header = document.querySelector('.header');
 header.append(message);
 //ADD THE CREATED HTML AS THE FIRST CHILD OF THE CREATED MESSAGE ELEMENT
@@ -319,4 +319,40 @@ eachNavLinks.forEach(link => {
   link.addEventListener('click', function () {
     document.body.classList.remove('nav-open');
   });
+});
+
+//************************************ sign up form validation ********************************
+
+const firstName = document.querySelector('.firstInput');
+const firstNameErrorMessage = document.querySelector('.firstName');
+const lastName = document.querySelector('.lastInput');
+const lastNameErrorMessage = document.querySelector('.lastName');
+const modalNextBtn = document.querySelector('.modalNextBtn');
+const email = document.querySelector('.emailInput');
+const emailErrorMassage = document.querySelector('.email');
+
+modalNextBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //if the first name field is empty
+  if (firstName.value.trim().length === 0) {
+    //display this error massage
+    firstNameErrorMessage.textContent = `Enter a valid first name`;
+  }
+
+  // if the last name field is empty
+  if (lastName.value.trim().length === 0) {
+    //display this error message
+    lastNameErrorMessage.textContent = `Enter a valid last name`;
+  }
+
+  if (email.value.trim().length === 0 || !email.value.includes('@')) {
+    emailErrorMassage.textContent = `Enter a valid email address`;
+  }
+
+  setTimeout(() => {
+    firstNameErrorMessage.textContent = ``;
+    lastNameErrorMessage.textContent = ``;
+    emailErrorMassage.textContent = ``;
+  }, 3000);
 });
